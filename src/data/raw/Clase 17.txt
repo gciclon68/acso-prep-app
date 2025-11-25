@@ -1,0 +1,250 @@
+Arquitectura del Computador
+y
+Sistemas Operativos
+Decimoséptima Clase
+
+Redundant Array of Inexpensive Disks (RAIDs) (1/10)
+
+SO
+��
+��
+
+Desde los primeros dispositivos de almacenamiento siempre han existido las
+siguientes necesidades:
+
+●
+
+Tener almacenamientos más grandes.
+
+●
+
+Tener almacenamientos más rápidos.
+
+●
+
+Tener redundancia, de forma que si un sector (o grupo de ellos) fallara
+por cualquier razón física, los datos almacenados no se pierdan.
+
+La forma más sencilla que se encontró para abordar estos problemas fue utilizar
+varios discos en lugar de uno. El grupo de discos se organiza de tal forma tal que se
+ven como uno solo.
+
+SO
+
+Redundant Array of Inexpensive Disks (RAIDs) (2/10)
+
+��
+��
+
+Los discos de muy alta capacidad
+tienen un costo por Tb mayor a otros de
+menor capacidad.
+En otras palabras, utilizar dos discos de
+la mitad de la capacidad puede no sólo
+ser más barato que uno solo sino
+además más rápido, dado que los dos
+discos se pueden leer y/o escribir en
+paralelo.
+Utilizar arreglos de discos puede darnos grandes unidades de almacenamiento
+que además sean económicas y rápidas. Ya solo falta una variable en la ecuación,
+hacerlos inmunes a errores físicos en los sectores
+
+Redundant Array of Inexpensive Disks (RAIDs) (3/10)
+SO
+
+Diagrama de Bloques
+
+��
+��
+
+La idea detrás del uso de varios discos como si fuera uno es intercalar una capa de
+software, el driver de RAID, entre el driver de disco y el driver de formato.
+De esta forma esta capa le “muestra” al driver de formato todos los discos debajo
+suyo como si fuera uno solo.
+
+Redundant Array of Inexpensive Disks (RAIDs) (4/10)
+SO
+
+RAID 0
+Deﬁnición:
+
+��
+��
+
+Ventajas:
+
+El RAID 0 es la simple concatenación de un grupo de discos para
+que se vean como un único disco de mayor capacidad.
+Respecto a un solo disco de la misma capacidad es más rápido,
+dado que los discos se pueden operar en paralelo. Dado que el
+Driver de Formato trata de mantener los archivos “juntos” para
+accederlos más rápidos, los sectores se intercalan entre discos. A
+este proceso se lo llama striping.
+
+Redundant Array of Inexpensive Disks (RAIDs) (5/10)
+SO
+
+RAID 1
+Deﬁnición:
+
+��
+��
+
+Ventajas:
+
+Desventajas:
+
+El RAID 1 también se conoce como “espejado”. Consiste en
+n-iplicar la información, copiándola en más de un disco,
+generalmente dos (pero pueden ser más).
+Respecto a un solo disco, no se gana ni capacidad ni velocidad de
+escritura, pero sí se agregó redundancia. Si ahora un sector falla en
+un disco, siempre se lo puede leer del otro. Mientras no haya
+errores sí se puede n-iplicar la velocidad de lectura, aprovechando
+para leer desde todos los discos.
+El disco resultante es mucho más chico.
+
+Redundant Array of Inexpensive Disks (RAIDs) (6/10)
+SO
+
+RAID 10
+Deﬁnición:
+
+��
+��
+
+Ventajas:
+Desventajas:
+
+El RAID 10, también conocido como RAID 1+0. Es la combinación
+de varios discos espejando algunos (RAID 1) y concatenando otros
+(RAID 0).
+Combina las ventajas de los dos tipos de RAID que lo conforman.
+El disco resultante es mucho más chico.
+
+Redundant Array of Inexpensive Disks (RAIDs) (7/10)
+SO
+
+RAID 5
+Deﬁnición:
+
+��
+��
+
+Ventajas:
+Desventajas:
+
+El RAID 5 guarda información de redundancia (a veces llamada
+paridad) que le permite recuperar un sector perdido con menos
+desperdicio de disco.
+Reduce el desperdicio de lugar manteniendo la redundancia
+Al grabar hay que perder tiempo generando la redundancia
+Se necesitan al menos tres discos.
+
+Redundant Array of Inexpensive Disks (RAIDs) (8/10)
+SO
+
+RAID 6
+Deﬁnición:
+
+��
+��
+
+Ventajas:
+Desventajas:
+
+El RAID 6 es similar al RAID 5, pero se guardan dos paridades
+linealmente independientes, que permiten que dos discos fallen
+sin pérdida de datos
+Doble redundancia con mínimo desperdicio de lugar.
+Al grabar hay que perder más tiempo, dado que hay que generar
+dos paridades. Se necesitan al menos cuatro discos.
+
+Redundant Array of Inexpensive Disks (RAIDs) (9/10)
+SO
+��
+��
+
+Always On
+La tecnología de RAIDs permite:
+● Aumentar la velocidad de transferencia
+● Tener discos mucho más grandes que los disponibles en plaza
+● Tener redundancia, evitando la pérdida de datos ante una falla
+Esta tecnología se combina con una característica del hardware que permite
+extraer y volver a colocar un disco sin apagar la computadora. Esta tecnología se
+denomina cambio en caliente o “Hot Swap”
+Ahora, cuando el administrador del sistema es alertado sobre fallas en un disco
+físico (el sistema sigue funcionando por la redundancia - el usuario no nota la falla)
+puede:
+● Indicarle al driver de RAID que libere el disco (ya no lo use más). El RAID
+sigue operando en modo degradado o “Degraded”
+● Remover el disco en caliente (sin apagar la computadora)
+● Colocar un nuevo disco en su lugar (sin apagar la computadora)
+● Indicarle al driver que el disco fue reemplazado. El driver entra en modo
+reconstruyendo o “rebuilding” mientras regenera el disco y luego, al
+terminar, automáticamente sale de modo degradado a limpio o “clean”.
+
+Redundant Array of Inexpensive Disks (RAIDs) (10/10)
+SO
+
+Soft vs. Hard
+Los RAIDs pueden ser implementados de distintas formas, dependiendo de
+dónde esté el Driver que los implementa:
+
+��
+��
+
+●
+
+Hardware: El RAID es implementado por una placa conectada
+físicamente al BUS del ordenador, como por ejemplo una placa PCIe. A
+dicha placa se le conectan todos los discos involucrados. Todas las
+tareas (lecturas, generación de paridad(es), etc. las hace el procesador
+en la placa.
+Son caras pero liberan por completo al procesador de cualquier
+overhead.
+
+●
+
+BIOS: El Driver está en la ROM de la computadora. Si bien el SO se libera
+de cualquier tarea relativa al RAID (ve un disco grande e ignora cómo se
+conforma físicamente), la misma es llevada a cabo por el(los)
+procesador(es) de la computadora.
+
+●
+
+Software: El Driver forma parte del mismo Sistema Operativo.
+
+Datacenter Storage
+SO
+
+DAS vs. NAS
+Hoy en día en los Datacenters la cantidad de almacenamiento es tan grande y
+diversa, que justiﬁca que se considere un componente independiente.
+
+��
+��
+
+Hay módulos de almacenamiento o “Storage” que son en realidad computadoras
+en sí mismas, y que se encargan de proporcionarle almacenamiento a las
+unidades de proceso. Tener el almacenamiento redundante en un lugar “distinto”
+a las unidades de proceso tienen otras ventajas que veremos más adelante.
+Para vincular las unidades de almacenamiento a las de proceso hay dos
+alternativas:
+●
+
+Direct Attached Storage: En este caso hay una conexión entre los
+módulos utilizando una conexión dedicada, como SATA, SCSI,, etc.
+Todos estos vínculos son punto a punto.
+
+●
+
+Network Attached Storage: La conexión se hace a través de una
+red, a la que se conectan múltiples nodos. Ejemplos pueden ser
+Ethernet, Fiber Channel, etc.
+
+Fin
+
+¿Preguntas?
+
+

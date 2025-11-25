@@ -1,0 +1,257 @@
+Arquitectura del Computador
+y
+Sistemas Operativos
+Vigesimocuarta Clase
+
+SO
+��
+��
+
+Arquitectura de Von Neumann
+Cuando estudiamos la arquitectura de ordenadores propuesta por Von Neumann
+hablamos de los dispositivos de Entrada/Salida. Consideramos tales a todo
+dispositivo que ingrese cualquier variable física al ordenador o viceversa.
+
+Ahora vamos a estudiar con más detalle los dispositivos más comunes y las
+tecnologías que los hacen funcionar.
+
+Dispositivos de Entrada/Salida (1/11)
+SO
+��
+��
+
+Teclados (1/2)
+La palabra inglés “Keyboard” o tabla de teclas denota el origen de los teclados:
+Una placa o tabla a la que se sujetaban llaves que al ser presionadas enviaban la
+novedad al procesador.
+Los teclados han cambiado mucho con los años. Se han agregado teclas, ha
+bajado mucho el precio y también cayó mucho la calidad.
+
+Dispositivos de Entrada/Salida (2/11)
+SO
+��
+��
+
+Teclados (2/2)
+Al presionar una tecla se interrumpe al procesador, éste lee de una posición de
+memoria el código de la tecla que fue presionada. Al liberarla, se vuelve a
+interrumpir al procesador indicando que la tecla volvió a la posición de reposo.
+Esta doble notiﬁcación, normalmente conocidas como “make” y “break” permite,
+por ejemplo, que al presionar las teclas especiales (como SHIFT, CONTROL o ALT) y
+mantenerlas presionadas otras teclas tengan más de una función.
+Los primeros teclados, por el circuito eléctrico que se usaban para detectar las
+teclas, casi no permitían que dos teclas se presionaran a la vez. Si sucedía, el
+teclado lo detectaba y no transmitía ninguna al procesador. La excepción eran
+precisamente las teclas especiales SHIFT, CONTROL, ALT, ALT-Gr.
+Ésto representó un problema para los juegos en que se requería mandar dos o
+más comandos simultáneamente. Hoy los teclados para juego (o “Gamer
+Keyboards”) soportan “N-Key rollover”, donde N representa la cantidad de teclas
+que pueden ser presionadas simultáneamente y aún poder ser correctamente
+detectadas, identiﬁcadas y reportadas a la CPU por el controlador del teclado.
+
+Dispositivos de Entrada/Salida (3/11)
+SO
+��
+��
+
+Ratones
+Inicialmente los ratones eran dispositivos mecánicos. La bola giraba y hacía rotar
+dos ejes que a su vez giraban potenciómetros (resistencias variables) que
+indicaban la posición.
+Más adelante los potenciómetros se reemplazaron por rayos de luz y una rueda
+dentada que interrumpía los haces al girar como en la ﬁgura. Estos pares se
+denominan “encoders”.
+Actualmente unos LEDs emiten luz y una pequeña cámara
+saca fotos unas 1000 veces por segundo. Un pequeño
+procesador analiza el movimiento entre cuadros de las
+imperfecciones sobre las que se desplaza el ratón y determina
+la dirección del movimiento.
+Por cada unidad de movimiento (generalmente 10 mils) se
+envía a la CPU cuánto se movió el dispositivo sobre cada uno
+de los ejes coordenados y el estado de los botones en un
+paquete de 5 bytes.
+
+Dispositivos de Entrada/Salida (4/11)
+SO
+��
+��
+
+Pantalla táctil
+La pantallas táctiles existen desde hace décadas. Las
+primeras consistían en un conjunto de de haces infrarrojos
+que al ser interrumpidos permitían determinar la posición
+del dedo. La resolución era baja, y muchas no soportaban
+usar más de un dedo a la vez.
+Luego aparecieron los llamados “resistivos”, comunes en
+la década del ‘90. Consistía de dos membranas
+transparentes, la superior ﬂexible con pequeños hilos
+conductores que se tocaban al ser presionadas. El par de
+hilos que se tocaba indicaba la posición presionada.
+Ahora se usan capas de vidrio rígidas, y en vez de detectar
+presión, se detecta la variación de la capacidad al acercarse
+el dedo conductor.
+En todos los casos un controlador monitorea permanentemente las líneas y reporta al procesador las presiones
+detectadas.
+
+Dispositivos de Entrada/Salida (5/11)
+SO
+��
+��
+
+Monitores (1/2)
+Los primeros monitores consistían en un vidrio frontal
+cubierto internamente por una película de un material
+derivado del fósforo que emitía luz al ser golpeado por
+electrones.
+Un haz de electrones partía de la parte posterior y podía ser
+modulado para tener mayor o menor potencia, que causaba
+puntos más o menos brillantes al impactar el fósforo.
+Mediante campos magnéticos, se hacía que el haz
+recorriera ﬁla por ﬁla y, al terminar una, arrancaba de nuevo
+en la siguiente.
+Los monitores de cristal líquido (o Liquid Crystal Displays)
+encierran entre dos placas de cristal un líquido con moléculas
+que pueden orientarse en presencia de un campo eléctrico. Luz
+polarizada se hace pasar desde la parte posterior. Cuando no hay
+campo eléctrico las moléculas desorientadas bloquean la luz,
+cuando las mismas se someten al campo eléctrico, se orientan y
+dejan pasar la luz polarizada, que se ven desde el frente.
+
+Dispositivos de Entrada/Salida (6/11)
+SO
+
+Monitores (2/2)
+
+��
+��
+
+Para obtener imágenes en color, la tecnología es la misma. La diferencia es que la
+luz blanca que proviene de la parte posterior se hace pasar por ﬁltros de colores
+rojo, verde y azul para luego generar los colores como combinación de éstos.
+Actualmente los monitores son una enorme matriz de LEDs. Los LEDs producen
+imágenes mucho más nítidas, dado que el tiempo que les lleva pasar de
+encendidos a apagados es mucho menor que la que tardan los cristales el volver a
+desorientarse al retirarse el campo eléctrico.
+
+Dispositivos de Entrada/Salida (7/11)
+SO
+��
+��
+
+Impresoras (1/3)
+Las primeras impresoras funcionaban casi de la misma forma en que lo hacían las
+máquinas de escribir. Una cinta de tela impregnada en tinta se colocaba entre el
+papel y un cabezal con agujas. Se utilizaban electroimanes para mover las agujas
+hacia adelante y atrás. Cuando estaban adelante empujaban la cinta contra el
+papel generando un punto.
+La cabeza tenía un conjunto de agujas colocadas una debajo de la otra y se
+disparaban juntas para imprimir esa columna. Luego se retraían y se desplazaba la
+cabeza hacia la derecha. El proceso se repetía hasta llegar a extremo derecho del
+papel, luego se volvía la cabeza a la izquierda y se avanzaba el papel para imprimir
+la siguiente ﬁla.
+La introducción del color se logró primero
+para la impresión de números contables. La
+cinta pasó a tener dos bandas de dos colores
+y se la subía o bajaba con cada carácter para
+cambiar de color.
+
+Dispositivos de Entrada/Salida (8/11)
+SO
+��
+��
+
+Impresoras (2/3)
+Las impresoras de chorro de tinta salen al mercado masivo a mediados de los ‘80.
+Tienen un cabezal con pequeños oriﬁcios que proyectan una diminuta gota de
+tinta al recibir un pulso eléctrico.
+El proceso de impresión es similar al de las impresoras de agujas, dado que se
+imprime una columna y se desplaza la cabeza hacia la derecha un punto. El
+proceso se repite para imprimir la ﬁla completa. Al terminar se avanza el papel
+hacia arriba y se repite el proceso.
+Algunos cartuchos tienen tres columnas de puntos
+de colores (en lugar una sola columna negra). Si
+bien están desplazadas el software lo compensa
+para colocar gotas de tintas de colores tan cercanas
+que se mezclan para ser percibidas como un color
+único.
+
+Dispositivos de Entrada/Salida (9/11)
+SO
+
+Impresoras (3/3)
+
+��
+��
+
+Las impresoras láser funcionan con un proceso
+contínuo de varios pasos:
+●
+●
+●
+●
+●
+●
+
+Limpieza
+Carga
+Dibujo
+Depósito de toner
+Transferencia
+Fusión
+
+El proceso arranca limpiando el rodillo fotosensible para sacar cualquier rastro de
+lo impreso antes. Luego se impregna una carga negativa en el rodillo usando alta
+tensión. Un láser dibuja sobre el rodillo fotosensible, eliminando la carga negativa
+en los lugares que toca. Al ser expuesto al toner, la parte del rodillo con carga
+negativa atrae partículas de toner, que son transferidas al papel con carga
+positiva.
+Por último un fusor calienta el polvo para convertirlo en una capa ﬁja al papel.
+
+Dispositivos de Entrada/Salida (10/11)
+SO
+��
+��
+
+Modems (1/2)
+El apócope MODEM viene de “Modulador-Demodulador”. Modular consiste en
+incorporarle información a una señal senoidal alterando alguno de sus parámetros,
+de forma de poder recuperar esa información en el otro extremo una vez recibida la
+senoidal alterada.
+La expresión general de una senoidal es:
+V(t) = A · sen( ⍵ t + 𝝋)
+Y ejemplos de modulación son:
+
+Dispositivos de Entrada/Salida (11/11)
+SO
+
+Modems (2/2)
+Estas señales pueden transmitirse por distintos medios:
+
+��
+��
+
+●
+
+Señales de audio por una línea telefónica (Modem lelefónico)
+
+●
+
+Señales electromagnéticas transmitidas por radio (Placa WiFi o Bluetooth)
+
+●
+
+Señales electromagnéticas en un Cable-Modem o Modem DSL
+
+●
+
+Pulsos de luz en un control remoto o ﬁbra óptica
+
+Es un procedimiento general que permite transmitir información de un lugar a otro.
+La velocidad máxima de transmisión de datos depende de la frecuencia de la señal
+que se modula, la cual varía en función de los medios usados para transmitirlas.
+
+Fin
+
+¿Preguntas?
+
+

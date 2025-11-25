@@ -1,0 +1,365 @@
+Arquitectura del Computador
+y
+Sistemas Operativos
+Vigesimoquinta Clase
+
+SO
+��
+��
+
+Buses (1/13)
+Como vimos oportunamente un “bus” es un conjunto de conexiones o cables
+paralelos con una función en común: interconectar dos bloques dentro de un
+ordenador.
+Hasta ahora analizamos los buses internos a la computadora, como el de
+“Address” y/o el de “Datos”. Estos buses están generalmente físicamente
+cableados en la placa madre sin que el usuario pueda usarlos para más nada que
+su ﬁn original.
+Para poder conectar dispositivos genéricos, inclusive algunos ni siquiera
+pensados por el diseñador de la placa madre, existen buses externos. Éstos están
+debidamente documentados de forma que cualquier persona pueda diseñar un
+equipo que se conecte al mismo. Luego deberá escribir el “driver”
+correspondiente y el dispositivo estaría disponible para su uso por cualquier tarea
+que corra el Sistema Operativo.
+
+Buses (2/13)
+SO
+
+Tipos
+Existen varias clasiﬁcaciones de Buses basándonos en diferentes variables. Por
+ejemplo podemos clasiﬁcarlos según el grado de paralelismo:
+
+��
+��
+
+●
+
+Buses Paralelos: La información viaja por varias líneas en forma simultánea.
+Por ejemplo se pueden colocar 8 líneas de datos para poder mandar un byte
+a la vez.
+Ejemplos de buses paralelos son algunos de los primeros que vimos, como el
+“Data Bus” (Bus de datos) o el “Address Bus” (Bus de direcciones).
+
+●
+
+Buses serie: En estos casos existe una única línea de datos, y la información
+se rearma como un conjunto de bits que se transmiten uno detrás del otro.
+Claramente se puede mandar menos información por segundo que en un
+bus paralelo, pero hay que ver para qué se usa la información recibida. Si, por
+ejemplo se transmite a una impresora, no sirve de nada mandar megabytes
+por segundo de información que no se puede imprimir a ese ritmo.
+Este tipo de buses tiene conectores más pequeños y económicos
+
+Buses (3/13)
+SO
+
+Velocidad
+Hay parámetros físicos que limitan la velocidad a la que se pueden transmitir los
+datos. Entre los que más inﬂuyen están:
+
+��
+��
+
+●
+●
+●
+
+El tamaño (grosor, largo, etc) del bus.
+La tensión usada para enviar los ceros y unos (si se envían en forma
+eléctrica).
+Si se transmite usando una sola línea o diferencial (si se envían en forma
+eléctrica).
+
+Buses diferenciales
+La mayoría de los buses destinados a interconectar
+sistemas a varios metros suelen tener dos cables
+por bit y no uno, mejorando la inmunidad al ruido.
+Ejemplos comunes son es el USB y el HDMI
+
+Buses (4/13)
+SO
+��
+��
+
+BUS ISA
+El BUS para interconexión de placas de expansión que
+traían las primeras PCs se denominaba ISA (Industry
+Standard Architecture).
+En el detalle podemos distinguir, además de las líneas
+que suministran energía al dispositivo conectado
+(Ground, +5Vdc), varias señales ya estudiadas:
+●
+
+El bus de address: A0 - A19
+
+●
+
+El bus de datos: D0 - D15
+
+●
+
+Líneas de interrupción: INT3 - INT8 y INT9 - INT15
+
+●
+
+Canales de DMA: DRQ/DACK 0 - 4 y 5 - 7, T/C
+
+El BUS ISA soportaba transferencias de 8 y 16 bits a
+una velocidad máxima de 8 MT/s, que con 2 Wait
+States permitía aproximadamente 5MB/s.
+
+Buses (5/13)
+SO
+��
+��
+
+BUS PCI
+El BUS PCI (Peripheral Component Interconnect) fue
+introducido a principios de los ‘90 con la clara necesidad
+de aumentar la velocidad de transferencia.
+Se redujo el tamaño de los pines, se llevó el ancho del bus
+de datos a 32 bits, se aumentó la velocidad de
+transferencia a 33 MT/s y se agregó la posibilidad de
+operarlo a 3.3 Volts además de 5 Volts.
+Otra mejora aparte de la velocidad fue soportar un bus de
+address de 32 o 64 bits, aumentando drásticamente el
+espacio de memoria direccionable.
+Con estas modiﬁcaciones el bus y sin la necesidad de Wait
+States la velocidad podía llegar a 133 MB/s.
+
+Buses (6/13)
+SO
+��
+��
+
+BUS PCI Express
+El cambio más distintivo del PCIe es que ahora es un bus
+serie diferencial. La información se transmite a través de
+dos líneas que se llaman “links”. La velocidad de
+transferencia de cada link es de 1 GB/s en cada dirección
+(para la versión PCI 3.0).
+A pesar de ello, hay distintos conectores que tienen
+distinta cantidad de links. Si se usan juntos se puede llegar
+a 16 GB/s en cada dirección.
+La última versión (raramente vista en PCs) es la 6.0, y tiene
+una tasa de transferencia de 64 GB/s en cada dirección,
+llegando a unos asombrosos 126 GB/s!
+Este standard se usa actualmente en todas las PCs, y es
+suﬁciente para el periférico que más velocidad requiere: las
+placas de video.
+
+Buses (7/13)
+SO
+��
+��
+
+Hot Swapping
+Todos los buses que vimos hasta ahora están diseñados para conectarse y
+desconectarse con los dispositivos apagados. Además, no soporta el uso de
+cables: Los dispositivos deben enchufarse directamente el en conector.
+Hay casos, como la conexión/desconexión de dispositivos como teclados, mouses,
+pen drives, etc. para los que sería muy molesto tener que apagar todos los
+equipos.
+Los buses que estudiaremos a continuación agregan la posibilidad de permitir la
+conexión/desconexión “en caliente”, o sea sin apagar los equipos. Esta capacidad
+no solamente requiere consideraciones especiales de hardware sino que los
+drivers que manejan estos buses tienen que poder “enterarse” de que un
+dispositivo nuevo se conectó o desconectó.
+
+Buses (8/13)
+SO
+��
+��
+
+SATA
+El bus SATA (Serial Advanced Technology Attachment) está diseñado
+especíﬁcamente para la conexión de “Block Devices”, principalmente discos.
+Si bien la velocidad es inferior al PCIe (hasta 600 MB/s en su versión 3.0), la norma
+permite el uso de cables de algo más de 1m para la norma interna y 2m para la
+versión eSATA (external SATA).
+Ésta es la tecnología actualmente usada
+para la conexión de los discos. Si bien en
+las notebooks y PCs de escritorio
+generalmente los discos se montan
+internamente y no son removibles en
+caliente, hay dispositivos que tienen
+bahías que permiten un fácil cambio de
+los discos con el sistema funcionando.
+
+Buses (9/13)
+SO
+
+Dispositivos M2 (SATA vs PCIe)
+Hoy en día es cada vez más común el uso de discos SSD con formato M2. Si bien
+el formato físico es el mismo. No todos se conectan igual.
+
+��
+��
+
+Algunos son SATA, y utilizan el puerto SATA disponible en el conector donde se
+los inserta. Se los suele identiﬁcar como M2-SATA y llegan a 600 MB/s.
+Otros utilizan los links PCIe que también están disponibles en el conector M2. A
+estos dispositivos se los identiﬁca como NVME. Pueden tener dos suﬁjos:
+●
+
+Suﬁjo “B”: Usan un solo link (PCIe x1) a 1 GB/s.
+
+●
+
+Suﬁjo “M”: Usan cuatro links (PCIe x4) a 4 GB/s.
+
+1 Tb disk 3.5 GB/s
+
+Buses (10/13)
+SO
+��
+��
+
+USB (1/4)
+El bus USB (Universal Serial Bus) se introdujo en el año 1998 y estaba pensado
+para ser una interfaz no tan rápida, pero sí versátil y de bajo costo. El conector no
+solamente tiene las líneas de datos sino de alimentación, en convenientes
+conectores de tan solo 4 conductores.
+Otra condición de diseño fue que los dispositivos pudieran conectarse sin abrir el
+ordenador ni conﬁgurar nada. El conector se colocaría fuera del gabinete. Al
+detectar un nuevo dispositivo, el software podía identiﬁcarlo, descargar el driver y
+poner el dispositivo en funcionamiento sin que el usuario conﬁgurara nada.
+Además a diferencia de sus contrapartes, permitiría la conexión de muchos
+dispositivos en un mismo conector.
+La última versión, USB 3.0 tiene un ancho de banda de unos 600 MB/s.
+
+Buses (11/13)
+SO
+��
+��
+
+USB (2/4)
+El vínculo entre el bus y el ordenador es el
+dispositivo llamado “root hub”. Al mismo se
+pueden conectar dispositivos u otros hubs.
+Al conectar un dispositivo, éste asume el
+número 0. Ni bien es detectado el driver le
+cambia el número de forma que éste sea
+único.
+Se puede conectar un máximo de 127
+dispositivos simultáneamente.
+Todos los paquetes que se transﬁeren por un único par de líneas bidireccionales.
+Cada uno está precedido por un identiﬁcador dado por el número de dispositivo
+(que es único), de esa forma se sabe quién lo originó (si va hacia arriba) o a dónde
+va (si va hacia abajo).
+El root hub es el que mantiene el sincronismo, iniciando una transferencia cada 1
+ms. Se inicia aún si no hay nada para enviar ni preguntar para mantener el
+conjunto sincronizado. En los casos en que hay datos los mismos pueden viajar
+en una u otra dirección dentro de la misma transferencia.
+
+Buses (12/13)
+SO
+
+USB (3/4)
+Durante el proceso de enumeración el dispositivo reporta una clase y una
+sub-clase. Algunos ejemplos son:
+
+��
+��
+
+Clase
+
+SubClase
+
+Protocolo
+
+0x01
+
+Audio Control
+Audio Streaming
+MIDI Streaming
+
+0x00
+
+0x03
+
+0x00
+
+0x07
+
+0x01
+
+0x08
+
+Varios
+
+None
+Keyboard
+Mouse
+Unidireccional
+Bidireccional
+Control/Bulk/Int
+Control/Bulk/No int
+
+0x09
+0x0E
+
+Descripción
+Audio
+
+Human Interface Device
+Printer
+Mass Storage Device
+Hub
+
+Comandos AT
+Auticulares
+Teléfonos
+
+Wireless device
+
+La información completa puede encontrarse en https://www.usb.org/deﬁned-class-codes
+
+Buses (13/13)
+SO
+��
+��
+
+USB (4/4)
+Ejemplo de paquete de discovery:
+static unsigned char devDesc[] = {
+0x12,
+/* 0 bLength */
+USB_DESCTYPE_DEVICE, /* 1 bdescriptorType */
+0x00,
+/* 2 bcdUSB version */
+0x02,
+/* 3 bcdUSB version */
+0x00,
+/* 4 bDeviceClass - Specified by interface */
+0x00,
+/* 5 bDeviceSubClass - Specified by interface */
+0x00,
+/* 6 bDeviceProtocol - Specified by interface */
+0x40,
+/* 7 bMaxPacketSize for EP0 - max = 64*/
+(VENDOR_ID & 0xFF),
+/* 8 idVendor */
+(VENDOR_ID >> 8),
+/* 9 idVendor */
+(PRODUCT_ID & 0xFF), /* 10 idProduct */
+(PRODUCT_ID >> 8),
+/* 11 idProduct */
+(BCD_DEVICE & 0xFF), /* 12 bcdDevice */
+(BCD_DEVICE >> 8),
+/* 13 bcdDevice */
+0x01,
+/* 14 iManufacturer - index of string*/
+0x02,
+/* 15 iProduct - index of string*/
+0x00,
+/* 16 iSerialNumber - index of string*/
+0x01
+/* 17 bNumConfigurations */
+};
+
+Fin
+
+¿Preguntas?
+
+

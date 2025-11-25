@@ -1,0 +1,254 @@
+Arquitectura del Computador
+y
+Sistemas Operativos
+Vigésimoprimer Clase
+
+Variables de entorno
+SO
+��
+��
+
+La mayoría de los sistemas operativos soportan el concepto de “variables de
+entorno”. Son un conjunto de pares “variable”=”valor” que, a los efectos del SO no
+signiﬁcan nada, pero que los programas pueden levantar para informarse de
+ciertas particularidades del sistema.
+
+En los shells se las muestra usando el comando “set”.
+Windows
+COMPUTERNAME=MIPC
+ComSpec=C:\WINDOWS\system32\cmd.exe
+Path=C:\WINDOWS\system32;C:\WINDOWS;
+USERNAME=usuario
+SystemDrive=C:
+SystemRoot=C:\WINDOWS
+TEMP=C:\Users\usuario\AppData\Local\Temp
+
+Linux
+HOSTNAME=server.udesa.edu.ar
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin
+USER=root
+
+Se pueden agregar variables al shell ejecutando set variable=valor, ese nuevo valor estará
+disponible hasta que se cierre el shell y para todos los programas que se lancen desde el mismo.
+
+Ejemplos de código para los temas vistos en las últimas dos clases
+SO
+��
+��
+
+Threads - Ejercicio 1
+Thread creado!
+
+Ejemplos de código para los temas vistos en las últimas dos clases
+SO
+��
+��
+
+Threads - Ejercicio 2
+Thread creado! Ahora espero...
+Soy el hilo!
+<Demora>
+Fin de espera, saliendo.
+
+Ejemplos de código para los temas vistos en las últimas dos clases
+SO
+��
+��
+
+Threads - Ejercicio 3
+Thread creado! Ahora espero...
+<Demora>
+Fin de espera, saliendo con Var=1.
+
+Ejemplos de código para los temas vistos en las últimas dos clases
+SO
+��
+��
+
+Threads - Ejercicio 4
+Soy el thread 0
+Soy el thread 1
+Soy el thread 2
+Soy el thread 3
+Soy el thread 4
+Soy el thread 5
+Soy el thread 6
+Soy el thread 7
+Soy el thread 8
+Thread creado! Ahora espero...
+Soy el thread 9
+<Demora>
+Fin de espera, saliendo.
+
+Ejemplos de código para los temas vistos en las últimas dos clases
+SO
+��
+��
+
+Threads - Ejercicio 5
+Thread creado! Ahora espero...
+<Demora>
+Fin de espera, saliendo con Var=1.
+
+Ejemplos de código para los temas vistos en las últimas dos clases
+SO
+��
+��
+
+Threads - Ejercicio 6
+Thread creado! Ahora espero...
+<Demora>
+Fin de espera, saliendo con Var=10.
+
+Ejemplos de código para los temas vistos en las últimas dos clases
+SO
+��
+��
+
+Threads - Ejercicio 7
+Thread creado! Ahora espero...
+Fin de espera, saliendo con Var=10.
+
+Ejemplos de código para los temas vistos en las últimas dos clases
+SO
+��
+��
+
+Threads - Ejercicio 8
+Thread 0 esperando qué hacer...
+Thread 1 esperando qué hacer...
+Thread 3 esperando qué hacer...
+Thread 2 esperando qué hacer...
+Thread 4 esperando qué hacer...
+Thread 5 esperando qué hacer...
+Thread 6 esperando qué hacer...
+Thread 7 esperando qué hacer...
+Thread 8 esperando qué hacer...
+Threads creados! Hacerlos trabajar presionando una tecla...
+Thread 9 esperando qué hacer...
+<Tecla ENTER>
+Lanzo 1 thread.
+Thread 0 corriendo!
+<Tecla ENTER>
+Lanzo 1 thread.
+Thread 1 corriendo!
+<Tecla x>
+
+Fin de espera, saliendo.
+
+Ejemplos de código para los temas vistos en las últimas dos clases
+SO
+��
+��
+
+Procesos - Ejercicio 1
+Inicio
+Padre ejecutando...
+
+Hijo ejecutando...
+
+Ejemplos de código para los temas vistos en las últimas dos clases
+SO
+��
+��
+
+Procesos - Ejercicio 2
+Inicio
+Padre ejecutando...
+Hijo ejecutando...
+Línea 1
+Línea 2
+Línea 3
+
+Ejemplos de código para los temas vistos en las últimas dos clases
+SO
+��
+��
+
+Procesos - Ejercicio 3
+Inicio
+Padre ejecutando...
+Hijo ejecutando...
+-rw------- 1 dav usuarios_dominio 580 Apr 15 09:50 thread3.c
+
+Ejemplos de código para los temas vistos en las últimas dos clases
+SO
+��
+��
+
+Procesos - Ejercicio 4
+Inicio
+Hijo 0 ejecutando...
+Hijo 1 ejecutando...
+Hijo 2 ejecutando...
+Hijo 3 ejecutando...
+Hijo 4 ejecutando...
+Hijo 5 ejecutando...
+Hijo 6 ejecutando...
+Hijo 7 ejecutando...
+Hijo 8 ejecutando...
+Padre ejecutando...
+Hijo 9 ejecutando...
+<Demora>
+Hijo 0 saliendo...
+Hijo 1 saliendo...
+Hijo 2 saliendo...
+Hijo 3 saliendo...
+Hijo 4 saliendo...
+Hijo 5 saliendo...
+Hijo 6 saliendo...
+Hijo 7 saliendo...
+Hijo 8 saliendo...
+Hijo 9 saliendo...
+Terminaron, Var=0.
+
+Ejemplos de código para los temas vistos en las últimas dos clases
+SO
+��
+��
+
+Procesos - Ejercicio 5
+Inicio
+Hijo 0 ejecutando...
+Hijo 1 ejecutando...
+Hijo 2 ejecutando...
+Hijo 3 ejecutando...
+Hijo 5 ejecutando...
+Hijo 6 ejecutando...
+Hijo 7 ejecutando...
+Hijo 4 ejecutando...
+Hijo 8 ejecutando...
+Padre ejecutando...
+Hijo 9 ejecutando...
+<Demora>
+Hijo 0 saliendo...
+Hijo 1 saliendo...
+Hijo 2 saliendo...
+Hijo 3 saliendo...
+Hijo 5 saliendo...
+Hijo 6 saliendo...
+Hijo 7 saliendo...
+Hijo 8 saliendo...
+Hijo 4 saliendo...
+Hijo 9 saliendo...
+Terminaron, Var=1.
+
+SO
+
+Ejercicio
+
+��
+��
+
+●
+
+Resuelva el problema del ejercicio anterior, garantizando que el
+incremento de la variable Var sea atómico (sin interferencia entre
+procesos).
+
+Fin
+
+¿Preguntas?
+
+

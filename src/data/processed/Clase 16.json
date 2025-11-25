@@ -1,0 +1,212 @@
+{
+    "id": "clase-16",
+    "title": "Clase 16: Arquitectura y Booting",
+    "summary": "### 🚀 **Proceso de Arranque (Booting)**\n\nEl camino desde el encendido hasta un SO operativo tiene dos grandes rutas:\n\n*   **BIOS / MBR (Legacy)**: Carga el sector de arranque (512 bytes) en `0x7c00`. Es limitado y antiguo.\n*   **UEFI / GPT (Moderno)**: Usa una partición especial (ESP) y soporta discos gigantes. 💾\n\n### 🛠️ **POST (Power On Self Test)**\n\nAntes de cargar nada, el hardware se auto-chequea:\n1.  **RAM**: Se cuenta y verifica. 🧠\n2.  **Dispositivos**: Se enumeran e inicializan (Plug & Play).\n3.  **Boot**: Se busca el dispositivo de arranque configurado.\n\n### 📂 **Sistemas de Archivos y Seguridad**\n\nEl SO debe interpretar los datos del disco. El gran desafío es la **Seguridad**:\n*   🐧 **Linux (POSIX)**: Permisos simples `rwx` para Usuario/Grupo/Otros.\n*   🪟 **Windows (ACLs)**: Listas de Control de Acceso, mucho más granulares y complejas.\n\n### 🐛 **Herramientas de Debugging**\n\nPara entender qué hace un proceso \"por dentro\":\n*   **`strace`**: 🕵️‍♂️ Muestra todas las **syscalls** (llamadas al sistema) que hace un programa (abrir archivos, leer, escribir).\n*   **`/proc`**: 📁 Un sistema de archivos **virtual**. No está en disco, ¡es una ventana al cerebro del Kernel! Muestra info de procesos (`/proc/PID`), memoria, y hardware en tiempo real.",
+    "mindMap": {
+        "nodes": [
+            {
+                "id": "1",
+                "type": "default",
+                "data": {
+                    "label": "Booting Process"
+                },
+                "position": {
+                    "x": 0,
+                    "y": 0
+                }
+            },
+            {
+                "id": "2",
+                "type": "default",
+                "data": {
+                    "label": "BIOS / POST"
+                },
+                "position": {
+                    "x": -200,
+                    "y": 100
+                }
+            },
+            {
+                "id": "3",
+                "type": "default",
+                "data": {
+                    "label": "MBR vs GPT"
+                },
+                "position": {
+                    "x": 200,
+                    "y": 100
+                }
+            },
+            {
+                "id": "4",
+                "type": "default",
+                "data": {
+                    "label": "File Systems Access"
+                },
+                "position": {
+                    "x": 0,
+                    "y": 200
+                }
+            },
+            {
+                "id": "5",
+                "type": "default",
+                "data": {
+                    "label": "Security (POSIX vs ACL)"
+                },
+                "position": {
+                    "x": -200,
+                    "y": 300
+                }
+            },
+            {
+                "id": "6",
+                "type": "default",
+                "data": {
+                    "label": "APIs (FUSE, WINAPI)"
+                },
+                "position": {
+                    "x": 200,
+                    "y": 300
+                }
+            },
+            {
+                "id": "7",
+                "type": "default",
+                "data": {
+                    "label": "Debugging Tools"
+                },
+                "position": {
+                    "x": 0,
+                    "y": 400
+                }
+            },
+            {
+                "id": "8",
+                "type": "default",
+                "data": {
+                    "label": "strace"
+                },
+                "position": {
+                    "x": -150,
+                    "y": 500
+                }
+            },
+            {
+                "id": "9",
+                "type": "default",
+                "data": {
+                    "label": "/proc fs"
+                },
+                "position": {
+                    "x": 150,
+                    "y": 500
+                }
+            }
+        ],
+        "edges": [
+            {
+                "id": "e1-2",
+                "source": "1",
+                "target": "2"
+            },
+            {
+                "id": "e1-3",
+                "source": "1",
+                "target": "3"
+            },
+            {
+                "id": "e1-4",
+                "source": "1",
+                "target": "4"
+            },
+            {
+                "id": "e4-5",
+                "source": "4",
+                "target": "5"
+            },
+            {
+                "id": "e4-6",
+                "source": "4",
+                "target": "6"
+            },
+            {
+                "id": "e4-7",
+                "source": "4",
+                "target": "7"
+            },
+            {
+                "id": "e7-8",
+                "source": "7",
+                "target": "8"
+            },
+            {
+                "id": "e7-9",
+                "source": "7",
+                "target": "9"
+            }
+        ]
+    },
+    "quiz": [
+        {
+            "id": "q1",
+            "question": "¿Qué tarea realiza el POST (Power On Self Test) durante el arranque?",
+            "options": [
+                "Carga el sistema operativo en memoria",
+                "Determina la cantidad de RAM e inicializa dispositivos",
+                "Formatea el disco rígido",
+                "Compila el kernel"
+            ],
+            "correctAnswer": 1,
+            "explanation": "El POST es la primera tarea del BIOS que verifica el hardware, cuenta la memoria RAM e inicializa dispositivos básicos antes de buscar el SO."
+        },
+        {
+            "id": "q2",
+            "question": "¿Cuál es una diferencia clave entre el arranque MBR y GPT?",
+            "options": [
+                "MBR es más nuevo y rápido",
+                "GPT soporta particiones mayores y es usado por UEFI",
+                "MBR no usa sectores de arranque",
+                "GPT solo funciona en Linux"
+            ],
+            "correctAnswer": 1,
+            "explanation": "GPT (GUID Partition Table) es el estándar moderno usado por UEFI, soportando discos y particiones mucho más grandes que el antiguo MBR."
+        },
+        {
+            "id": "q3",
+            "question": "¿Qué permite el comando `strace` en Linux?",
+            "options": [
+                "Ver el uso de CPU en tiempo real",
+                "Trazar todas las llamadas al sistema (syscalls) de un proceso",
+                "Compilar programas en C",
+                "Recuperar archivos borrados"
+            ],
+            "correctAnswer": 1,
+            "explanation": "`strace` intercepta y registra las llamadas al sistema que realiza un proceso, lo que es fundamental para entender cómo interactúa con el kernel (abrir archivos, leer, escribir, etc.)."
+        },
+        {
+            "id": "q4",
+            "question": "¿Qué contiene el directorio `/proc` en Linux?",
+            "options": [
+                "Archivos de configuración del usuario",
+                "Un sistema de archivos virtual que expone el estado del kernel y procesos",
+                "Los binarios de las aplicaciones instaladas",
+                "Documentación del sistema"
+            ],
+            "correctAnswer": 1,
+            "explanation": "`/proc` no contiene archivos reales en disco; es una interfaz virtual del kernel que muestra información en tiempo real sobre hardware, memoria y procesos (ej. `/proc/PID`)."
+        },
+        {
+            "id": "q5",
+            "question": "¿Qué mecanismo usa Windows para la seguridad de archivos, a diferencia del POSIX tradicional?",
+            "options": [
+                "ACLs (Access Control Lists)",
+                "Permisos rwx (lectura, escritura, ejecución)",
+                "No tiene seguridad de archivos",
+                "Usa encriptación por defecto"
+            ],
+            "correctAnswer": 0,
+            "explanation": "Mientras que POSIX usa el modelo simple de usuario/grupo/otros, Windows utiliza ACLs, que ofrecen una granularidad mucho mayor para definir permisos por usuario y tipo de acceso."
+        }
+    ]
+}
